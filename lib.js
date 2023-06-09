@@ -17,8 +17,22 @@ window.addEventListener('scroll', (e) => {
     if ((scrollTop >= maxScroll - 1) && (blog.currentPage < blog.totalePage - 1)) {
         blog.currentPage++;
         showPosts();
+        // call to function to set the active indicator
+        setIndicatoreAttivo();
     }
 })
+
+// function to set the active indicator
+function setIndicatoreAttivo() {
+    let indicatori = document.querySelectorAll('span.position');
+    indicatori.forEach((indicatore,  i) => {
+        if (blog.currentPage === i) {
+            indicatore.setAttribute('class', 'position active');
+        } else {
+            indicatore.setAttribute('class', 'position');
+        }
+    });
+}
 
 // retrieve post from external website with 'fetch'
 async function initBlog() {
